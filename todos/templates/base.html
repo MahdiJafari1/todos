@@ -40,9 +40,10 @@
 
   <body>
 
+    
     <div class="mb-1">
       <nav class="navbar navbar-expand-md navbar-light bg-light">
-        <div class="container-fluid">
+        <div class="container">
           <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -96,7 +97,28 @@
       {% endif %}
 
       {% block content %}
-        <p>Use this document as a way to quick start any new project.</p>
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-6 p-5 mb-4 bg-light rounded-3">
+          <div class="text-center">
+            <h1>Start a new To-Do list</h1>
+            <form method="POST" action="/">
+              {% csrf_token %}
+              {{ form.text }} 
+              {% if form.errors %}
+              <div class="form-group has-error">
+                <div class="help-block">{{ form.text.errors }}</div>
+              </div>
+              {% endif %}
+            </form>
+          </div>
+        </div>
+      </div>
+    
+      <div class="row d-flex justify-content-center mt-3">
+        <div class="col-md-6 col-md-offset-3">
+          {% block table %} {% endblock %}
+        </div>
+      </div>
       {% endblock content %}
 
     </div> <!-- /container -->
